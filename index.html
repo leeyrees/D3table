@@ -1,0 +1,116 @@
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>D3JS Dynamic Table</title>
+        <style>
+            h1 {color:rgb(118, 187, 75); font-size:40px;}
+            body {background-color:rgb(210, 236, 207); text-align:center;}
+            p {font-family:verdana; font-size:15px;color: rgb(51, 107, 107);}
+            .name {
+                color: black;
+     
+            }
+            
+            .x {
+                color: black;
+               
+            }
+        
+            
+            .y {
+                color: black;
+               
+            }
+            
+            .length {
+                color: black;
+            }
+            
+            
+            .height {
+                color: black;
+            }
+            
+            .color {
+                color: black;
+    
+            }
+            
+          </style>
+        <script src="https://d3js.org/d3.v6.min.js"></script>
+        <script>
+            function select() { 
+                d3.selectAll("table").remove()
+                if(document.getElementById("Options").value=="1"){
+                    csv_url_1 = false ? "data1.csv" : "https://raw.githubusercontent.com/leeyrees/table2/main/data1.csv"
+                    
+                  d3.csv(csv_url_1,
+                  (d,i,c) => {
+              
+                 d3.select("body").insert("table")
+                 .append("tr")
+                 .selectAll("td")
+                 .data(c).enter()
+                 .append("td").text(e => d[e])
+                 .attr("class", e => e)
+                  })
+                  
+                } else if(document.getElementById("Options").value  == "2") {
+                    csv_url_2 = false ? "data2.csv" : "https://raw.githubusercontent.com/leeyrees/table2/main/data2.csv";
+                    d3.csv(csv_url_2,
+                    (d,i,c) => {
+                        d3.select("body").insert("table")
+                        .append("tr")
+                        .selectAll("td")
+                        .data(c).enter()
+                        .append("td").text(e => d[e])
+                        .attr("class", e => e)
+                        })
+                    
+                }
+            }
+            function setValue() {
+              selectValue=document.getElementById("Options").value;
+            }
+            function init() {
+              var button=document.getElementById("button");
+              button.onclick=data;
+
+            }
+            
+            
+          </script>
+    </head>
+
+    <body>
+        <h1 title = "D3JS Dynamic Table">D3JS Dynamic Table</h1>
+        <p>
+           Please, select an option in order to see the data. 
+           <br>
+            <select id="Options" onChange="select()">
+                <option selected disabled>Select data set</option>
+                <option value="1">Data 1</option>
+                <option value="2">Data 2</option>
+            </select>
+            
+    
+            <br>
+            
+            <table></table>
+      
+      
+            
+
+
+        </p>
+        
+        
+        
+        
+
+        
+
+       
+    </body>
+</html>
